@@ -10,29 +10,38 @@ import org.hibernate.cfg.Configuration;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Student s1=new Student();
-//        s1.setRollNo(5);
-//        s1.setName("Walter");
-//        s1.setAge(25);
+//        Laptop l1 = new Laptop();
+//        l1.setBrand("Asus");
+//        l1.setModel("rog");
+//        l1.setRam(16);
+//
+//        Coder c1 = new Coder();
+//        c1.setCid(101);
+//        c1.setName("Raj");
+//        c1.setTech("Java");
+//        c1.setLaptop(l1);
+        Student stud=new Student();
+        stud.setAge(30);
+        stud.setRollNo(2);
+        stud.setName("David");
 
-//        Configuration c = new Configuration();
-//        c.addAnnotatedClass(org.example.Student.class);
-//        c.configure();
-
-//        Student s2=new Student();
-        String s2=null;
         SessionFactory sf = new Configuration().addAnnotatedClass(org.example.Student.class).configure().buildSessionFactory();
         Session s = sf.openSession();
-        s1=s.get(Student.class,5);
-        Transaction t = s.beginTransaction();
-//        s2 = s.get(Student.class,4);
-//        s.persist(s1);
-//        s.merge(s1);
+
+//        configuration loads the xml file
+
+        Transaction t = s.beginTransaction();           // we can manipulate data in DB only between transactions
+//        Student s2 = s.load(Student.class,1);
+//          s.persist(stud);
+        s.merge(stud);
 //        s.remove(s1);
         t.commit();
+
+//        Student c2 = s.get(Student.class ,3);
+//        System.out.println(c2);
         s.close();
         sf.close();
 
-        System.out.println(s1);
+//        System.out.println();
     }
 }
